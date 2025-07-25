@@ -10,7 +10,7 @@ const initializeRedis = async () => {
     console.warn("REDIS_URL not defined, Session will use memory store");
     return;
   }
-
+  console.log(REDIS_URL);
   if (REDIS_URL) {
     redisClient = createClient({
       url: REDIS_URL,
