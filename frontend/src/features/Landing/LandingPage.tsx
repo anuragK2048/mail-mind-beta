@@ -11,6 +11,7 @@ function LandingPage() {
     <div className="flex gap-10">
       <button onClick={handleLogin}>{temp}</button>
       <button onClick={() => navigate("test")}>Click me to test</button>
+      <button onClick={() => navigate("inbox")}>Inbox</button>
     </div>
   );
 }
