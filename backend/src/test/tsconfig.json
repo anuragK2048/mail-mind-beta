@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "types": [], // <-- This disables automatic inclusion of @types/*
+    "skipLibCheck": true
+  },
+  "include": ["sub_pub.ts"]
+}

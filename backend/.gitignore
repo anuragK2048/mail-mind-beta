@@ -1,0 +1,7 @@
+.env.local
+.env
+credentials/
+node_modules
+/dist
+data/
+db.schema.txt
