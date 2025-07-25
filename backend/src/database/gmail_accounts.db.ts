@@ -38,8 +38,8 @@ export const duplicateAccountCheck = async (google_id: string) => {
   }
   console.log(data);
   if (data) {
-    return false;
-  } else return true;
+    return data;
+  } else return false;
 };
 
 export const getAllConnectedAccountTokenDetails = async (
