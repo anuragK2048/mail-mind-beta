@@ -27,18 +27,19 @@ export const duplicateAccountCheck = async (google_id: string) => {
   const { data, error } = await supabase
     .from("gmail_accounts")
     .select("*")
-    .eq("google_user_id_for_account", google_id)
-    .single(); // Optional: use .single() if you expect only 1 result
-  // if (error) {
-  //   console.error(error);
-  //   throw new BadRequestError(
-  //     "Unable to check duplicate accounts",
-  //     "DB_CHECK_ERROR"
-  //   );
-  // }
+    .eq("google_user_id_for_account", google_id);
+
+  if (error) {
+    console.error(error);
+    throw new BadRequestError(
+      "Unable to check duplicate accounts",
+      "DB_CHECK_ERROR"
+    );
+  }
+  console.log(data);
   if (data) {
-    return data; // object
-  } else return false;
+    return false;
+  } else return true;
 };
 
 export const getAllConnectedAccountTokenDetails = async (
