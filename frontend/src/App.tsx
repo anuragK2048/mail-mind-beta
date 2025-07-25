@@ -20,6 +20,15 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route
+              path="/test"
+              element={
+                <div className="flex items-center justify-center text-slate-300">
+                  Hey, can you see me?????
+                </div>
+              }
+            />
+
+            <Route
               element={
                 <ProtectedRoute>
                   <AppLayout />
