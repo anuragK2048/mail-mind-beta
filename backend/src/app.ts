@@ -66,10 +66,10 @@ async function initializeApp() {
       resave: false,
       saveUninitialized: false,
       cookie: {
-        secure: false,
+        secure: true,
         httpOnly: true,
         maxAge: 60 * 60 * 1000 * 3, // 1 hour
-        sameSite: "lax", // Consider 'strict' if appropriate
+        sameSite: "none", // Consider 'strict' if appropriate
       },
     })
   );
