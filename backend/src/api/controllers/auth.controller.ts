@@ -91,6 +91,12 @@ export const handleGoogleCallback = asyncWrapper(
         req.session.isLoggedIn = true;
         res.redirect(FRONTEND_URL + `/inbox`);
       } else {
+        // Check if email is already connected
+        const existingGmailLink = await duplicateAccountCheck(google_id);
+        if (existingGmailLink) {
+          console.log("Account already exists");
+          return res.json({ message: "Account already connected" });
+        }
         // Register new user
         console.log("REGISTERING NEW USER");
         const newUserAccountPayload: NewUserAccountPayload = {
@@ -125,7 +131,7 @@ export const handleGoogleCallback = asyncWrapper(
           userData.id,
           newUserDefaults.defaultLabels
         ).then(() =>
-          syncEmailsForAccount(userData.id, gmailAccountData.id, 20)
+          syncEmailsForAccount(userData.id, gmailAccountData.id, 50)
         );
 
         res.redirect(FRONTEND_URL + `/inbox`);
@@ -155,7 +161,7 @@ export const handleGoogleCallback = asyncWrapper(
       delete req.session.oauthFlowContent;
 
       // Syncing emails
-      syncEmailsForAccount(appUserId, gmailAccountData.id, 20);
+      syncEmailsForAccount(appUserId, gmailAccountData.id, 50);
 
       res.redirect(FRONTEND_URL + `/inbox`);
     }

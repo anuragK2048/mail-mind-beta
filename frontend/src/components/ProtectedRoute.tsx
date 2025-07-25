@@ -22,12 +22,16 @@ function ProtectedRoute({ children }) {
   });
 
   useEffect(() => {
-    const primary = userData?.gmail_accounts.find(
-      (val) => val.type === "primary"
-    );
-    if (primary) {
-      setSelectedEmailAccountIds([primary.id]);
+    const allAccount = userData?.gmail_accounts?.map((val) => val.id);
+    if (allAccount) {
+      setSelectedEmailAccountIds(allAccount);
     }
+    // const primary = userData?.gmail_accounts.find(
+    //   (val) => val.type === "primary"
+    // );
+    // if (primary) {
+    //   setSelectedEmailAccountIds([primary.id]);
+    // }
     setUserData(userData);
   }, [userData, setSelectedEmailAccountIds, setUserData]);
 

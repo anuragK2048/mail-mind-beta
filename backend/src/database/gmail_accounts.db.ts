@@ -27,18 +27,11 @@ export const duplicateAccountCheck = async (google_id: string) => {
   const { data, error } = await supabase
     .from("gmail_accounts")
     .select("*")
-    .eq("google_user_id_for_account", google_id);
+    .eq("google_user_id_for_account", google_id)
+    .single();
 
-  if (error) {
-    console.error(error);
-    throw new BadRequestError(
-      "Unable to check duplicate accounts",
-      "DB_CHECK_ERROR"
-    );
-  }
-  console.log(data);
   if (data) {
-    return data;
+    return data; // object
   } else return false;
 };
 
@@ -55,6 +48,7 @@ export const getAllConnectedAccountTokenDetails = async (
       "Failed to fetch Gmail accounts for token revocation."
     );
   }
+  console.log(data);
 
   return data || [];
 };

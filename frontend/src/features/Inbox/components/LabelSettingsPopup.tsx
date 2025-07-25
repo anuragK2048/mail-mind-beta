@@ -268,7 +268,7 @@ function LabelForm({ currentLabel, onBack }) {
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="description">Description (Optional)</Label>
+          <Label htmlFor="description">Prompt (Optional)</Label>
           <Textarea
             id="description"
             value={description}
@@ -285,13 +285,15 @@ function LabelForm({ currentLabel, onBack }) {
             className="h-10 w-16 p-1"
           />
         </div>
-        <div className="mt-4 flex justify-end">
+        <div className="mt-4 flex flex-col items-center justify-end">
           <Button
             type="submit"
             disabled={updateMutation.isLoading || createMutation.isLoading}
+            className="w-1/2"
           >
             {currentLabel ? "Update Label" : "Create Label"}
           </Button>
+          <div>It would take some time to categorize emails</div>
         </div>
       </form>
     </>

@@ -82,6 +82,7 @@ export function AppSidebar() {
             userData={userData}
           />
           <AlertDialogue
+            userData={userData}
             onContinue={handleDeleteAccount}
             description={
               "This action cannot be undone. This will permanently delete your account and remove your data from the server."

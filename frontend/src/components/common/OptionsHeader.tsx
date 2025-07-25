@@ -37,8 +37,10 @@ function OptionsHeader() {
       <Avatars />
       <div className="flex items-center justify-center gap-4">
         <UnreadToggle />
-        <Search />
-        <Pen />
+        <div className="flex gap-4 opacity-30">
+          <Search />
+          <Pen />
+        </div>
       </div>
     </div>
   );

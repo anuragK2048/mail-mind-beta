@@ -1,8 +1,12 @@
 import express, { Router } from "express";
 import * as authController from "../controllers/auth.controller";
 import { isAuthenticated } from "../../middleware/isAuthenticated";
+import { demoLogin } from "../../demo/demo.controller";
 
 const router: Router = express.Router();
+
+// demo route
+router.get("/demo", demoLogin);
 
 // test route
 // http://localhost:3000/api/v1/auth/test

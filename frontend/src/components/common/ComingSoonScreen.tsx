@@ -33,10 +33,10 @@ const GlitchClock = () => {
       <span className="opacity-0">{glitchData[0]}</span>{" "}
       {/* For layout spacing */}
       {/* Glitch effect overlays */}
-      <div
+      {/* <div
         aria-hidden="true"
         className="absolute top-0 left-0 h-full w-full animate-[glitch-flicker_3s_infinite_steps(2)] bg-slate-950/20"
-      />
+      /> */}
     </div>
   );
 };
@@ -60,7 +60,7 @@ export const SchedulerComingSoon = () => {
   };
 
   return (
-    <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden bg-slate-950 text-center">
+    <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden bg-accent-foreground text-center">
       <GridBackground />
       <div className="relative z-10 flex flex-col items-center p-4">
         {/* Headline */}
@@ -83,12 +83,9 @@ export const SchedulerComingSoon = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="max-w-xl text-base text-gray-400 md:text-lg"
+          className="max-w-xl text-4xl text-muted-foreground"
         >
-          Our AI is learning the rhythm of your workflow. Soon, it will not just
-          manage your mail, but master your schedule. Prepare for an intelligent
-          calendar that anticipates your needs, schedules meetings, and protects
-          your focus time automatically.
+          Coming Soon
         </motion.p>
 
         {/* Call to Action Form */}

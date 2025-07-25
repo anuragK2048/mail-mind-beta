@@ -2,7 +2,7 @@ import React from "react";
 
 export const GridBackground = () => {
   return (
-    <div className="absolute inset-0 h-full w-full bg-slate-950">
+    <div className="absolute inset-0 h-full w-full bg-accent">
       {/* Radial gradient for the central glow */}
       <div className="absolute top-0 right-0 bottom-0 left-0 bg-[radial-gradient(circle_500px_at_50%_200px,#3e3e52,transparent)]"></div>
 

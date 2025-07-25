@@ -19,6 +19,9 @@ export async function handleLogout() {
   });
   const result = await res.json();
   console.log(result);
+  if (result) {
+    window.location.href = `/`;
+  }
 }
 
 export async function handleDeleteAccount() {
@@ -27,7 +30,7 @@ export async function handleDeleteAccount() {
     credentials: "include",
   });
   if (response.status == 200) {
-    window.location.href = "/landing";
+    window.location.href = "/";
   }
 }
 
@@ -50,4 +53,9 @@ export function handleAddNewAccount() {
 
 export function handleLogin() {
   window.location.href = `${API_BASE_URL}/api/v1/auth/google`;
+}
+
+export function handleDemoLogin() {
+  console.log("HI");
+  window.location.href = `${API_BASE_URL}/api/v1/auth/demo`;
 }

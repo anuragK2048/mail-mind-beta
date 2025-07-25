@@ -10,7 +10,8 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-function AlertDialogue({ description, onContinue, children }) {
+function AlertDialogue({ description, onContinue, children, userData }) {
+  const isDemoUser = userData?.id === import.meta.env.VITE_DEMO_USER_ID;
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
@@ -21,7 +22,11 @@ function AlertDialogue({ description, onContinue, children }) {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={onContinue}>Continue</AlertDialogAction>
+          {isDemoUser ? (
+            <AlertDialogAction>Can't delete demo account 😁</AlertDialogAction>
+          ) : (
+            <AlertDialogAction onClick={onContinue}>Continue</AlertDialogAction>
+          )}
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
