@@ -3,6 +3,7 @@ import { Mail, ArrowRight, UserCheck } from "lucide-react";
 import { handleDemoLogin, handleLogin } from "@/api/userApi";
 
 const LandingPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 p-4">
       <div className="w-full max-w-md">
@@ -54,7 +55,14 @@ const LandingPage = () => {
 
           {/* --- Demo User Button --- */}
           <button
-            onClick={handleDemoLogin}
+            onClick={async () => {
+              const redirect = await handleDemoLogin();
+              if (redirect) {
+                navigate("inbox");
+              } else {
+                console.log("demo login unsuccessfull");
+              }
+            }}
             className="group flex w-full items-center justify-center gap-3 rounded-lg border border-transparent bg-blue-600 px-6 py-3 font-semibold text-white shadow-sm transition-all duration-200 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
           >
             <UserCheck className="h-6 w-6" />
