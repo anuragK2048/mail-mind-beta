@@ -17,17 +17,31 @@ import { useLocation, useNavigate } from "react-router";
 // import DOMPurify from "dompurify"; // Import for security
 
 // Helper to format dates, kept from your original code
-const formatDate = (dateString) => {
+const formatDate = (dateString, format = "full") => {
   if (!dateString) return "";
   const date = new Date(dateString);
-  return date.toLocaleString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    hour12: true,
-  });
+  if (format === "full") {
+    return date.toLocaleString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
+  } else if (format === "date") {
+    return date.toLocaleString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  } else if (format === "time") {
+    return date.toLocaleString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
+  }
 };
 
 // The component now receives the full email object from your DB
@@ -111,42 +125,36 @@ function EmailBox({
   const toggleExpand = () => setExpanded(!expanded);
 
   return (
-    <div className="flex max-h-full flex-grow flex-col">
+    <div className="flex max-h-full w-full flex-col">
       {/* Email Body & Details */}
       <div className="flex flex-col overflow-hidden p-4 pt-2">
         <div className="mb-6 flex items-start justify-between">
           <div className="flex items-center">
             {/* Avatar */}
-            <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-blue-500 text-lg font-bold text-white">
+            <div className="mr-3 flex min-h-8 min-w-8 items-center justify-center rounded-full bg-blue-500 text-lg font-bold text-white md:h-10 md:w-10">
               {from_name ? from_name.charAt(0).toUpperCase() : "?"}
             </div>
             {/* Sender/Recipient Info */}
             <div className="flex flex-col">
-              <div className="flex items-center">
-                <span className="font-semibold text-primary">
+              <div className="flex flex-col items-center gap-2 max-sm:w-50 md:flex-row">
+                <div className="truncate font-semibold whitespace-nowrap text-primary">
                   {from_name || "Unknown Sender"}
-                </span>
-                <span className="ml-2 text-sm text-muted-foreground">
+                </div>
+                <div className="truncate text-sm text-muted-foreground md:ml-2">
                   {from_address}
-                </span>
+                </div>
               </div>
-              <div className="text-sm text-muted-foreground">
+              <div className="hidden text-sm text-muted-foreground md:block">
                 to {to_addresses?.join(", ") || "undisclosed-recipients"}
-                <button
-                  onClick={toggleExpand}
-                  className="ml-2 inline-block align-middle text-muted-foreground"
-                >
-                  {expanded ? (
-                    <ChevronUp size={16} />
-                  ) : (
-                    <ChevronDown size={16} />
-                  )}
-                </button>
               </div>
             </div>
           </div>
-          <div className="flex items-center pl-2 text-xs whitespace-nowrap text-muted-foreground">
-            {formatDate(sent_date)}
+          <div className="flex items-center pl-2 text-xs whitespace-nowrap text-muted-foreground max-sm:mt-1">
+            <span className="hidden md:block">{formatDate(sent_date)}</span>
+            <div className="flex flex-col items-end md:hidden">
+              <span>{formatDate(sent_date, "date")}</span>
+              <span>{formatDate(sent_date, "time")}</span>
+            </div>
           </div>
         </div>
 
@@ -167,7 +175,7 @@ function EmailBox({
       </div>
 
       {/* Action Buttons Footer */}
-      <div className="flex justify-end border-t border-accent-foreground/20 p-4">
+      <div className="flex justify-center border-t border-accent-foreground/20 p-4 md:justify-end">
         <div className="flex space-x-2 text-muted-foreground">
           <button className="flex cursor-pointer items-center rounded-full border border-gray-300 px-4 py-2 text-sm font-medium hover:bg-muted hover:text-primary hover:shadow-sm">
             <Reply size={16} className="mr-2" />

@@ -116,7 +116,6 @@ function AccountSettingsDialogue({ disablePrimary, cb, userData, title }) {
                 variant={"outline"}
                 className={`text-md`}
                 disabled={disablePrimary && account.type === "primary"}
-                onClick={() => cb(account.id)}
               >
                 {account.gmail_address}
               </Button>

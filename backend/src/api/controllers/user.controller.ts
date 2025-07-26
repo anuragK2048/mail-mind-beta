@@ -9,6 +9,7 @@ import {
 } from "../../database/users.db";
 import { NODE_ENV } from "../../config";
 import { InternalServerError } from "../../errors/specificErrors";
+import { decrypt } from "../../utils/crypto.utils";
 
 // Handles GET /api/v1/users/me
 export const getCurrentUserProfile = asyncWrapper(
@@ -37,10 +38,10 @@ export const deleteCurrentUserAccount = asyncWrapper(
     );
     googleAccountsDetails.forEach((accountDetails) => {
       const refresh_token = accountDetails.refresh_token_encrypted;
-      // First decrypt the refresh token
-      const result = revokeGoogleToken(refresh_token);
+      const decryptedToken = decrypt(refresh_token);
+      const result = revokeGoogleToken(decryptedToken);
       if (result == "error") {
-      } // error in revoking refresh token
+      }
     });
     // Remove appUser from users DB
     await deleteAppUser(userAppId);

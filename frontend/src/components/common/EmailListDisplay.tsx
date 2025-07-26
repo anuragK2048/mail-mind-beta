@@ -197,7 +197,7 @@ function EmailListItem({ email, navigateTo, selectedEmailAccountIds }) {
           </div>
         </div>
       </div>
-      <div className="min-w-3/12 text-left text-xl whitespace-nowrap @5xl:min-w-[10%]"></div>
+      <div className="min-w-[10%] text-left text-xl whitespace-nowrap"></div>
     </div>
   );
 }

@@ -55,16 +55,18 @@ function EmailDisplay({ emailId }) {
   if (isLoading) return <LoaderIcon />;
   return (
     <div className="flex h-full w-full flex-col">
-      <div className="flex h-[6%] w-full items-center justify-between p-2 px-4">
-        <button className="text-accent-foreground/80 hover:text-accent-foreground">
-          <ArrowLeft onClick={removeLastSegment} />
-        </button>
-        <div>
-          <h2 className="truncate pr-4 text-xl font-normal">
-            {email?.subject}
-          </h2>
+      <div className="h-[8%] w-full flex-col items-center justify-between px-4 md:flex md:h-[6%] md:flex-row md:py-2">
+        <div className="flex">
+          <button className="text-accent-foreground/80 hover:text-accent-foreground">
+            <ArrowLeft onClick={removeLastSegment} />
+          </button>
+          <div className="ml-4 overflow-auto">
+            <h2 className="truncate pr-4 text-xl font-normal">
+              {email?.subject}
+            </h2>
+          </div>
         </div>
-        <div>
+        <div className="mt-2 flex items-center justify-center md:mt-0">
           <button
             onClick={() => archiveEmail(email)}
             className="cursor-pointer rounded-full p-2 text-accent-foreground/70 hover:text-accent-foreground"
@@ -105,7 +107,7 @@ function EmailDisplay({ emailId }) {
           </button>
         </div>
       </div>
-      <div className="flex h-[94%] flex-1">
+      <div className="mt-1 flex h-[92%] max-w-full flex-1 md:h-[94%]">
         {email && <EmailBox emailDetails={email} />}
       </div>
     </div>

@@ -70,6 +70,7 @@ const envSchema = z.object({
   SUPABASE_ANON_KEY: z.string().min(1),
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1).optional(),
   GOOGLE_PUB_SUB_TOPIC_NAME: z.string().min(1).optional(),
+  ENCRYPTION_KEY: z.string().min(1),
 });
 
 // Validate environment variables
@@ -103,6 +104,7 @@ export const {
   SUPABASE_ANON_KEY,
   SUPABASE_SERVICE_ROLE_KEY,
   GOOGLE_PUB_SUB_TOPIC_NAME,
+  ENCRYPTION_KEY,
 } = validatedEnv;
 
 export const CORS_ORIGINS =

@@ -39,7 +39,7 @@ function LabelOptions() {
     { id: "other", name: "Other" },
   ];
   return (
-    <div className="@container">
+    <div className="@container flex flex-col items-center justify-center @max-xs:hidden">
       <div className="hidden w-full items-center gap-14 overflow-x-auto text-3xl @5xl:flex">
         {allLabelOptions?.map((val) => (
           <Link
@@ -52,7 +52,7 @@ function LabelOptions() {
         ))}
         <LabelSettingsPopup labels={labels} />
       </div>
-      <div className="mt-2 flex px-2 @5xl:hidden">
+      <div className="mt-2 flex w-full px-2 @5xl:hidden">
         <Select
           // The value is ALWAYS the string ID from the URL param
           value={labelId}

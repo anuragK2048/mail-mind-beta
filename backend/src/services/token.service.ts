@@ -2,6 +2,7 @@ import https from "https";
 import querystring from "querystring";
 import { getEncryptedRefreshToken } from "../database/gmail_accounts.db";
 import { string } from "zod/v4";
+import { decrypt } from "../utils/crypto.utils";
 
 export const revokeGoogleToken = (tokenToRevoke: string): string | void => {
   const postData = querystring.stringify({ token: tokenToRevoke });
@@ -88,5 +89,14 @@ export const getDecryptedUserRefreshToken = async (
     appUserId,
     gmailAccountId
   );
-  return refresh_token_encrypted;
+
+  try {
+    const decryptedToken = decrypt(refresh_token_encrypted);
+    return decryptedToken;
+  } catch (decryptionError) {
+    console.error(
+      `Failed to decrypt token for user ${appUserId}, account ${gmailAccountId}`
+    );
+    return null;
+  }
 };

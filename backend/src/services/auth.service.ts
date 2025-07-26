@@ -1,5 +1,6 @@
 // generate oauthflowcontent
 import { GOOGLE_CLIENT_ID, baseOauth2Client, GMAIL_SCOPES } from "../config";
+import { encrypt } from "../utils/crypto.utils";
 const google: any = require("googleapis").google;
 
 export const generateGoogleOAuthURL = (csrfToken: string) => {
@@ -66,11 +67,14 @@ export async function validateUser(code: string): Promise<ValidatedGoogleUser> {
     avatarUrl = idTokenPayload.picture || null;
   }
 
+  // Encrypt refresh token before storing in DB
+  const encryptedToken = encrypt(tokens.refresh_token);
+
   return {
     googleId: idTokenPayload.sub,
     email: idTokenPayload.email,
     fullName: idTokenPayload.name || null,
     avatarUrl: avatarUrl,
-    refreshToken: tokens.refresh_token,
+    refreshToken: encryptedToken,
   };
 }
